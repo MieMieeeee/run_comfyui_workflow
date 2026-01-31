@@ -2,7 +2,7 @@
 
 本项目旨在通过 Python 脚本方便地调用和运行 ComfyUI 工作流。它提供了一个简化的 API 包装器，允许用户加载 ComfyUI 的 API 格式工作流，动态修改参数（如提示词、种子、图像尺寸等），并获取生成结果。
 
-> **说明**：本项目为了方便使用，直接集成了 [comfy_api_simplified](https://github.com/deimos-deimos/comfy_api_simplified) 的核心代码。感谢原作者 [deimos-deimos](https://github.com/deimos-deimos) 以及所有贡献者，本人也小小的参与了该项目 : )。
+> **说明**：本项目为了方便使用，直接集成了 [comfy_api_simplified](https://github.com/deimos-deimos/comfy_api_simplified) 的核心代码。感谢原作者 [deimos-deimos](https://github.com/deimos-deimos) 以及所有贡献者（本项目作者也曾参与贡献了该项目的部分代码）。
 
 ## 目录结构
 
@@ -76,7 +76,7 @@ for width, height, folder_name in sizes:
     # 修改节点参数：根据节点的 title 修改
     wf.set_node_param("EmptySD3LatentImage", "height", height)
     wf.set_node_param("EmptySD3LatentImage", "width", width)
-  
+    
     # 修改提示词
     wf.set_node_param("CLIP Text Encode (Positive Prompt)", "text", "Your prompt here...")
 
@@ -104,15 +104,42 @@ for width, height, folder_name in sizes:
 python run/your_script.py
 ```
 
+## 🖥️ Web 界面 (Gradio)
+
+本项目提供了一个可视化的 Web 界面，无需编写代码即可运行和调试工作流。
+
+### 启动方式
+
+确保已安装 `gradio` 和 `pillow`（运行 `pip install -e .` 即可），然后执行：
+
+```bash
+python run/web_ui.py
+```
+
+界面将在 **http://127.0.0.1:7878** 启动。
+
+### 功能特性
+
+1.  **工作流管理**：
+    *   自动读取 `workflows/` 目录下的所有 JSON 文件。
+    *   支持直接上传新的 API 格式 JSON 文件（上传后自动保存）。
+2.  **动态参数修改**：
+    *   无需修改代码，在界面上通过下拉菜单选择任意节点 (Node) 和参数 (Input)。
+    *   输入新值后点击 "添加/更新修改"，即可覆盖原工作流参数。
+    *   支持添加多个修改项，所有修改会在生图时统一应用。
+3.  **批量生成**：
+    *   设置 "运行次数 (Batch Count)"，可一次性循环执行多次任务。
+4.  **结果预览**：
+    *   生成的图片会实时展示在界面的画廊中，并自动保存到 `results/web_ui/` 目录。
+
 ## 常用功能
 
 - **修改节点参数**：使用 `wf.set_node_param(node_title, param_name, value)`。
-
   - `node_title`: 对应 ComfyUI 中节点的标题（Title）。
   - `param_name`: 对应节点输入的参数名（如 `text`, `seed`, `width`, `height` 等）。
   - `value`: 要设置的新值。
-- **提交任务**：使用 `api.queue_and_wait_images(wf, output_node_title="Save Image")`。
 
+- **提交任务**：使用 `api.queue_and_wait_images(wf, output_node_title="Save Image")`。
   - 会阻塞直到图片生成完成并返回图片数据。
 
 ## 注意事项

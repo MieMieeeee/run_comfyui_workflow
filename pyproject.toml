@@ -13,7 +13,9 @@ authors = [
 ]
 dependencies = [
   "requests>=2.0",
-  "websockets>=10.0"
+  "websockets>=10.0",
+  "gradio>=4.0",
+  "pillow>=10.0"
 ]
 
 [tool.setuptools.packages.find]
