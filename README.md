@@ -1,5 +1,9 @@
 # Run ComfyUI Workflow
 
+![Run ComfyUI Workflow](assets/github封面-中文.png)
+
+[中文](README.md) | [English](README_EN.md)
+
 本项目旨在通过 Python 脚本方便地调用和运行 ComfyUI 工作流。它提供了一个简化的 API 包装器，允许用户加载 ComfyUI 的 API 格式工作流，动态修改参数（如提示词、种子、图像尺寸等），并获取生成结果。
 
 > **说明**：本项目为了方便使用，直接集成了 [comfy_api_simplified](https://github.com/deimos-deimos/comfy_api_simplified) 的核心代码，并进行了部分修改。感谢原作者 [deimos-deimos](https://github.com/deimos-deimos) 以及所有贡献者（本项目作者也曾参与贡献了原项目的部分代码）。
