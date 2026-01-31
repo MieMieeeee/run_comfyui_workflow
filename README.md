@@ -113,7 +113,7 @@ python run/your_script.py
 确保已安装 `gradio` 和 `pillow`（运行 `pip install -e .` 即可），然后执行：
 
 ```bash
-python run/web_ui.py
+python cmd/web_ui.py
 ```
 
 界面将在 **http://127.0.0.1:7878** 启动。
